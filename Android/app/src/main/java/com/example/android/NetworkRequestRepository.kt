@@ -15,9 +15,13 @@ class NetworkRequestRepository {
             try {
                 println("loginRepository = ${Thread.currentThread().name}")
                 Thread.sleep(2000)
-                callback.onComplete(Result.Success("Success"))
+                mainThreadHandler.post {
+                    callback.onComplete(Result.Success("Success"))
+                }
             } catch (e: Exception) {
-                callback.onComplete(Result.Failure("Something went wrong"))
+                mainThreadHandler.post {
+                    callback.onComplete(Result.Failure("Something went wrong"))
+                }
             }
         }
     }

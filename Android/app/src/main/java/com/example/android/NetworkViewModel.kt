@@ -15,13 +15,13 @@ class NetworkViewModel {
                 when (result) {
                     is Result.Success -> {
                         //If set called here app will crash because set data is not allowed on background thread, either first switch to main
-                        // thread using handler or use post like below.
-                        data.postValue( "Success")
+                        // thread using handler.
+                        data.value = ( "Success")
                         println("loginRepository = ${result.data}")
                     }
 
                     is Result.Failure -> {
-                        data.postValue("Failure")
+                        data.value = ("Failure")
                         println("loginRepository = ${result.error}")
                     }
                 }
