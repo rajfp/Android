@@ -17,19 +17,24 @@ class NetworkViewModel : ViewModel() {
         // and stay here in main thread or vice versa.
 
         viewModelScope.launch {
-            when (val result = loginRepository.makeLoginRequest()) {
-                is Result.Success -> {
-                    println("loginRepository = view model ${Thread.currentThread().name}")
-                    data.value = "Success"
-                    println("loginRepository = ${result.data}")
-                }
-
-                is Result.Failure -> {
-                    data.value = ("Failure")
-                    println("loginRepository = ${result.error}")
-                }
-            }
+            val result1 = launch { loginRepository.makeLoginRequest() }
+            val result2 = launch { loginRepository.makeLoginRequest() }
+//            println("loginRepository = ${result1.data}")
+//            println("loginRepository = ${result2.data}")
+//            when (result) {
+//                is Result.Success -> {
+//                    println("loginRepository = view model ${Thread.currentThread().name}")
+//                    data.value = "Success"
+//                    println("loginRepository = ${result.data}")
+//                }
+//
+//                is Result.Failure -> {
+//                    data.value = ("Failure")
+//                    println("loginRepository = ${result.error}")
+//                }
+//            }
         }
+
     }
 
 }
