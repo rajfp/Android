@@ -24,6 +24,6 @@ class MainActivity : ComponentActivity() {
 
     fun doAction(view:View) {
         val app = (application as MyApplication)
-        model.makeLoginRequest(app.executorService, app.mainThreadHandler)
+        model.makeLoginRequest(app.threadPoolExecutor, app.mainThreadHandler)
     }
 }
