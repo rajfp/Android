@@ -2,9 +2,7 @@ package com.example.android
 
 import android.app.Service
 import android.content.Intent
-import android.os.Handler
 import android.os.IBinder
-import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 

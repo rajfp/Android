@@ -1,13 +1,16 @@
-package com.arpit.play.billing
+package com.example.android
 
+import android.os.Handler
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 
 class NetworkRequestRepository {
-    var executorService: ExecutorService = Executors.newFixedThreadPool(4)
 
-    fun makeLoginRequest(callback: RepositoryCallback<String>) {
+    fun makeLoginRequest(
+        executorService: ExecutorService,
+        mainThreadHandler: Handler,
+        callback: RepositoryCallback<String>
+    ) {
         executorService.execute {
             try {
                 println("loginRepository = ${Thread.currentThread().name}")
