@@ -14,6 +14,8 @@ class NetworkViewModel {
             override fun onComplete(result: Result<String>) {
                 when (result) {
                     is Result.Success -> {
+                        //If set called here app will crash because set data is not allowed on background thread, either first switch to main
+                        // thread using handler or use post like below.
                         data.postValue( "Success")
                         println("loginRepository = ${result.data}")
                     }
