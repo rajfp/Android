@@ -2,6 +2,7 @@ package com.example.android
 
 import android.os.Handler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 
@@ -12,9 +13,9 @@ class NetworkRequestRepository {
     suspend fun makeLoginRequest(): Result<String> {
         return withContext(Dispatchers.IO) {
             try {
+                delay(2000)
                 println("loginRepository = ${Thread.currentThread().name}")
                 println("loginRepository = startmakeLoginRequest")
-                Thread.sleep(2000)
                 println("loginRepository = makeLoginRequest")
                 Result.Success("Success")
 
@@ -29,9 +30,9 @@ class NetworkRequestRepository {
             try {
                 println("loginRepository = ${Thread.currentThread().name}")
                 println("loginRepository = startmakeLoginRequest")
-                Thread.sleep(5000)
+                //Thread.sleep(5000)
                 println("loginRepository = makeLogRequest")
-                Result.Success("Success")
+                Result.Success("Success2")
 
             } catch (e: Exception) {
                 Result.Failure("Something went wrong")
@@ -39,12 +40,13 @@ class NetworkRequestRepository {
         }
     }
 }
+
 interface RepositoryCallback<T> {
     fun onComplete(result: Result<T>)
 }
 
 // IF we use normal threads insted of suspend then it will be a blocking call if we use thread.sleep. It means rest of code wont run until
- //sleep finishes
+//sleep finishes
 
 //fun makeLoginRequest(): Result<String> {
 //

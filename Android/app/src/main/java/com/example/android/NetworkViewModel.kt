@@ -17,20 +17,34 @@ class NetworkViewModel : ViewModel() {
         // and stay here in main thread or vice versa.
 
         viewModelScope.launch {
+            //suspended means that whole coroutine will get suspended when suspend function is called,
+            //but if another new coroutine is called next to it it will not get suspended like here.
+            //one coroutine suspension will not affect other, only coroutine where suspended function is called will get
+            // suspended.
             val result1 = launch { loginRepository.makeLoginRequest() }
-            val result2 = launch { loginRepository.makeLoginRequest() }
-//            println("loginRepository = ${result1.data}")
-//            println("loginRepository = ${result2.data}")
-//            when (result) {
+            val result2 = launch { loginRepository.makeLogRequest() }
+//            when (result1) {
 //                is Result.Success -> {
 //                    println("loginRepository = view model ${Thread.currentThread().name}")
 //                    data.value = "Success"
-//                    println("loginRepository = ${result.data}")
+//                    println("loginRepository = ${result1.data}")
 //                }
 //
 //                is Result.Failure -> {
 //                    data.value = ("Failure")
-//                    println("loginRepository = ${result.error}")
+//                    println("loginRepository = ${result1.error}")
+//                }
+//            }
+//            when (result2) {
+//                is Result.Success -> {
+//                    println("loginRepository = view model ${Thread.currentThread().name}")
+//                    data.value = "Success"
+//                    println("loginRepository = ${result2.data}")
+//                }
+//
+//                is Result.Failure -> {
+//                    data.value = ("Failure")
+//                    println("loginRepository = ${result2.error}")
 //                }
 //            }
         }
